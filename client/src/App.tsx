@@ -1,5 +1,6 @@
 import './App.css'
 import { ActionButton } from './components/Buttons'
+import { Link } from 'react-router'
 import Navbar from './components/Navbar'
 import chilling from './assets/chilling.png'
 
@@ -15,7 +16,7 @@ function App() {
             <span className=' text-cream'>Never the same paint</span> twice again.
           </h1>
           <p className=' text-lg'>You'll know exactly what you have in your drawers – the brand, the quantity, the composition... Well, maybe not the last one, but you get the idea.</p>
-          <ActionButton title='Get Started' />
+          <Link to="/stash"><ActionButton title='Get Started' /></Link>
         </div>
       </div>
     </div>
