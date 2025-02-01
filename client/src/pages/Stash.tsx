@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import Navbar from '../components/Navbar';
-import StashCards, { CreateVault } from '../components/StashCards';
+import StashCards, { CreateVaultCard } from '../components/StashCards';
 
 interface Stash {
   name: string,
@@ -30,7 +30,7 @@ const Stash = () => {
       <h1 className=' flex justify-center p-4 font-extrabold font-montserrat text-5xl text-center'>Welcome to your stash !<br /> Let's see what's in there.</h1>
       <div className=' flex flex-row p-4 gap-4 justify-center flex-grow'>
         <Link><StashCards /></Link>
-        <Link to='/'><CreateVault /></Link>
+        <Link to='/newvault'><CreateVaultCard /></Link>
       </div>
     </div >
   );
