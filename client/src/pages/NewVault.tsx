@@ -9,9 +9,17 @@ interface Vault {
 const NewVault = () => {
 
   const [vault, setVault] = useState<Vault>({ name: "" })
+  const [error, setError] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!vault.name) {
+      setError("Empty field")
+      return
+    }
+
+    setError("")
 
     try {
       const res = await fetch("http://localhost:3000/api/vault", {
@@ -44,7 +52,7 @@ const NewVault = () => {
           <form className=' flex flex-col p-4 bg-cream rounded-lg border-2 gap-2 -translate-y-1' onSubmit={handleSubmit}>
             <label className=' font-bold'>Name</label>
             <input className='border-b-[1px] focus:outline-none'
-              placeholder='Red House Drawers'
+              placeholder='Ex. Batcave Drawer'
               id='name'
               name='name'
               type='text'
@@ -59,6 +67,12 @@ const NewVault = () => {
             </button>
           </form>
         </div>
+
+        {error && (
+          <div>
+            <aside className=' italic text-red-500 font-semibold'>You should give a name to your Vault ...</aside>
+          </div>
+        )}
 
       </div>
     </div>

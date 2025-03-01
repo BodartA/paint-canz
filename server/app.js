@@ -3,6 +3,9 @@ const app = express()
 const mongoose = require('mongoose');
 const Vault = require('./models/Vault')
 
+const vaultRoutes = require('./routes/vault')
+const userRoutes = require('./routes/user')
+
 app.use(express.json())
 
 app.use((req, res, next) => {
@@ -18,22 +21,28 @@ async function main() {
   await mongoose.connect('mongodb+srv://admin:Tingasol59@cluster0.iqctw.mongodb.net/paint_canz?retryWrites=true&w=majority&appName=Cluster0');
 }
 
-app.post('/api/vault', (req, res, next) => {
+app.use('/api/vault', vaultRoutes)
+app.use('/api/auth', userRoutes)
 
-  const vault = new Vault({
-    ...req.body
-  });
-  
+// app.get('/api/vault/:id', async (req, res, next) => {
 
-  vault.save()
-  .then(() => res.status(201).json({Message: 'Vault created'}))
-  .catch(error => res.status(400).json({error}))
-})
+//   const { id } = req.params
 
-app.get('/api/vault', (req, res, next) => {
+//   try {
 
-  Vault.find()
-  .then(vault => res.status(200).json(vault))
-});
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       res.status(400).json({ message: "Invalid ID format" });
+//     }
+
+//     const vault = await Vault.findById(id)
+//     if (!vault) {
+//       res.status(404).json({message : "Vault not found"})
+//     }
+//     res.json(vault)
+//   } catch (error) {
+    
+//     res.status(500).json({error})
+//   }
+// });
 
 module.exports = app

@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import StashCards, { CreateVaultCard } from '../components/StashCards';
 
 interface Stash {
+  _id: string,
   name: string,
   paints: { name: string, brand: string, ref: string }[]
 }
@@ -35,16 +36,11 @@ const Stash = () => {
       <div className=' flex flex-row flex-wrap p-4 gap-4 justify-center'>
         {
           stash.map((vault, index) => (
-            <Link key={index} to='/'>
+            <Link key={index} to={`/vault/${vault._id}`}>
               <StashCards index={index} name={vault.name} totalPaints={vault.paints.length} />
             </Link>
           ))
         }
-
-
-
-
-
 
         <Link to='/newvault'><CreateVaultCard /></Link>
       </div>
