@@ -3,15 +3,23 @@ const app = express()
 const mongoose = require('mongoose');
 const Vault = require('./models/Vault')
 
+
 const vaultRoutes = require('./routes/vault')
 const userRoutes = require('./routes/user')
 
 app.use(express.json())
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000'];
+  const origin = req.headers.origin;
+  
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
 });
 
