@@ -5,11 +5,13 @@ import { Link } from 'react-router';
 import { FormButton, LogoBButton } from '../components/Buttons';
 import { Chrome, Github } from 'lucide-react';
 import { PasswordForm, TextForm } from '../components/Forms';
-
+import { useNavigate } from 'react-router';
 const LoginPage = () => {
 
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -24,14 +26,13 @@ const LoginPage = () => {
 
       if (res.ok) {
         console.log("Success")
+        navigate('/stash')
       } else {
         console.log("Request Error")
       }
     } catch (error) {
       console.log(error)
     }
-
-
   }
 
   return (

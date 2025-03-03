@@ -2,6 +2,8 @@ const User = require('../models/User')
 const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
 
+require('dotenv').config()
+
 exports.signup = async (req, res, next) => {
 
   try {
@@ -49,7 +51,7 @@ exports.login = async (req, res, next) => {
 
     const token = jwt.sign(
       {userId: user._id},
-      "RANDOM_TOKEN_SECRET",
+      process.env.JWT_SECRET || "RANDOM_TOKEN_SECRET",
       {expiresIn: '24h'}
     )
 

@@ -2,12 +2,14 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose');
 const Vault = require('./models/Vault')
-
-
+const cookieParser = require('cookie-parser');
 const vaultRoutes = require('./routes/vault')
 const userRoutes = require('./routes/user')
 
 app.use(express.json())
+app.use(cookieParser());
+require('dotenv').config();
+
 
 app.use((req, res, next) => {
   const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000'];
