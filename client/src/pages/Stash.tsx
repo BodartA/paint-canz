@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import Navbar from '../components/Navbar';
 import StashCards, { CreateVaultCard } from '../components/StashCards';
+import { useNavigate } from 'react-router';
 
 interface Stash {
   _id: string,
@@ -12,22 +13,28 @@ interface Stash {
 
 const Stash = () => {
 
+  const navigate = useNavigate()
+
   const [stash, setStash] = useState<Stash[]>([])
 
   useEffect(() => {
 
     const fetchStashData = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/vault')
+        const res = await fetch('http://localhost:3000/api/vault', {
+          method: 'GET',
+          credentials: 'include'
+        })
         const data = await res.json()
 
         setStash(data)
       } catch (error) {
         console.log(error)
+        navigate('/login')
       }
     }
     fetchStashData()
-  }, [])
+  }, [navigate])
 
   return (
     <div className='flex flex-col min-h-screen w-screen'>

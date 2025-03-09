@@ -6,6 +6,8 @@ module.exports = (req, res, next) => {
 
     const token = req.cookies.token
 
+    console.log("Token extrait :", token)
+
     if (!token) {
       return res.status(401).json({message: "Unauthorized"})
     }
@@ -22,5 +24,4 @@ module.exports = (req, res, next) => {
     
     res.status(401).json({message: "Invalid or expired token"})
   }
-  
 }

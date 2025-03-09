@@ -5,10 +5,17 @@ const Vault = require('./models/Vault')
 const cookieParser = require('cookie-parser');
 const vaultRoutes = require('./routes/vault')
 const userRoutes = require('./routes/user')
+const authRoutes = require('./routes/auth')
+const cors = require('cors');
 
 app.use(express.json())
 app.use(cookieParser());
 require('dotenv').config();
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 
 
 app.use((req, res, next) => {
@@ -33,6 +40,7 @@ async function main() {
 
 app.use('/api/vault', vaultRoutes)
 app.use('/api/auth', userRoutes)
+app.use('/api/auth', authRoutes)
 
 // app.get('/api/vault/:id', async (req, res, next) => {
 
