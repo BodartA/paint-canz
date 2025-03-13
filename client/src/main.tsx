@@ -8,11 +8,12 @@ import NewVault from './pages/NewVault.tsx';
 import Vault from './pages/Vault.tsx';
 import LoginPage from './pages/LoginPage.tsx';
 import SignUpPage from './pages/SignUpPage.tsx';
-
+import ErrorPage from './pages/ErrorPage.tsx';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path='*' element={<ErrorPage />} />
         <Route path='/' element={<App />} />
         <Route path='/stash' element={<Stash />}></Route>
         <Route path='/newvault' element={<NewVault />}></Route>

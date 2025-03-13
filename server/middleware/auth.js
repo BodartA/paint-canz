@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
     }
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET || "RANDOM_TOKEN_SECRET")
+
     if (typeof decodedToken === 'object' && decodedToken !== null && 'userId' in decodedToken) {
       req.userData = { userId: decodedToken.userId };
       next();

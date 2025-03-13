@@ -25,9 +25,18 @@ const Stash = () => {
           method: 'GET',
           credentials: 'include'
         })
-        const data = await res.json()
 
+        if (!res.ok) {
+
+          if (res.status === 401) {
+            throw new Error("Unauthorized token")
+          }
+          throw new Error("HTTP error : " + res.status)
+        }
+
+        const data = await res.json()
         setStash(data)
+
       } catch (error) {
         console.log(error)
         navigate('/login')
